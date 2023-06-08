@@ -17,7 +17,7 @@ noterouter.post('/create',async(req,res)=>{
 noterouter.get('/',async(req,res)=>{
     try {
       const note=await noteModel.find()
-      res.json(note)
+      res.json({data:note})
     } catch (error) {
       res.status(404).json({message: error.message})
     }
@@ -40,7 +40,7 @@ noterouter.patch('/update/:id',async(req,res)=>{
   }
 
 })
-noterouter.delete('/date:id',async(req,res)=>{
+noterouter.delete('/delete/:id',async(req,res)=>{
   const {id}=req.params
   const usersideId=req.body.userId
   try {
