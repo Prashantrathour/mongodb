@@ -29,9 +29,10 @@ userrouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   if (email || password) {
     const userfind = await userModel.findOne({email});
-    console.log(userfind)
-    if (userfind) {
+    console.log(userfind.email)
+    if (userfind.name) {
       bcrypt.compare(password,userfind.password, async (err, result) => {
+        console.log(result,password,userfind.password)
         if (err) {
           res.status(404).json({ error: err.message });
         } else if (result) {

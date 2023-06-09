@@ -15,12 +15,35 @@ noterouter.post('/create',async(req,res)=>{
       } 
 })
 noterouter.get('/',async(req,res)=>{
+
+
     try {
       const note=await noteModel.find()
-      res.json({data:note})
+      res.json({note})
     } catch (error) {
       res.status(404).json({message: error.message})
     }
+  
+})
+noterouter.get('/:id',async(req,res)=>{
+  const id=req.params.id
+  console.log(id)
+  if(id) {
+    try {
+      const note=await noteModel.findById(id)
+      res.json({note})
+    } catch (error) {
+      res.status(404).json({message: error.message})
+    }
+  }else{
+
+    try {
+      const note=await noteModel.find()
+      res.json({note})
+    } catch (error) {
+      res.status(404).json({message: error.message})
+    }
+  }
 })
 noterouter.patch('/update/:id',async(req,res)=>{
   const {id}=req.params
